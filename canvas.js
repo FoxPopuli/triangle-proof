@@ -14,7 +14,9 @@ let vertices = [
 ];
 
 let isDragging = false;
-
+let startX;
+let startY;
+let currentShape;
 
 function drawShapes (shapeArr) {
     // Clear the canvas
@@ -56,16 +58,14 @@ canvas.onmousedown = function (e) {
     // Get abs position of canvas
     let rect = this.getBoundingClientRect(); 
     // Adjust mouse
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-
+    startX = e.clientX - rect.left;
+    startY = e.clientY - rect.top;
 
     vertices.forEach(vertex => {
         getArc(vertex);
-        if (ctx.isPointInPath (x, y)) {
+        if (ctx.isPointInPath (startX, startY)) {
             isDragging = true;
-            console.log(true);
-            
+            currentShape = vertex;      
         }
     })
 
@@ -87,5 +87,24 @@ canvas.onmouseout = function (e) {
 }
 
 canvas.onmousemove = function (e) {
-    console.log(isDragging);
+    if (!isDragging) {return};
+    e.preventDefault();
+
+    // Get abs position of canvas
+    let rect = this.getBoundingClientRect(); 
+
+    // Adjust mouse
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    let dx = x - startX;
+    let dy = y - startY;
+
+    currentShape.x += dx;
+    currentShape.y += dy; 
+
+    drawShapes(vertices);
+
+    startX = x;
+    startY = y;
 }
