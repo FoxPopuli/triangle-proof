@@ -12,8 +12,22 @@ body {
     height: 1000px;
 }
 #canvas {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     /* height: 500px;
     width: 500px; */
     border: solid black 1px;
+}
+#canvas2 {
+    position: absolute;
+
+    z-index: 1;
+    /* margin-top: 50px; */
+    /* height: 500px;
+    width: 500px; */
+    border: solid black 1px;
+}
+
+
+.hidden {
+    display: none;
 }
