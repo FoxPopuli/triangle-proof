@@ -56,20 +56,7 @@ function draw (shapeArr) {
         ctx.lineTo(x2, y2);
         ctx.stroke();
 
-        // Get gradient
-        let m1 = (y2 - y1)/(x2 - x1);
-        let a1 = Math.atan(m1);
 
-        let m2 = (y3 - y1)/(x3 - x1);
-        let a2 = Math.atan(m2)
-
-        let angles = [a1, a2].sort( (a, b) => {
-            return a < b ? 1 : -1;
-        })
-
-        ctx.beginPath();
-        ctx.arc(x1, y1, 10, angles[0], angles[1], true);
-        ctx.stroke();
         i++;
     }
 
